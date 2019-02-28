@@ -12,9 +12,12 @@ public class PlayerMotor : MonoBehaviour
     public int CurrentScore;
     public Text ScoreText;
 
+    public AudioSource flapSound;
+    public AudioSource pointSound;
+
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -23,6 +26,7 @@ public class PlayerMotor : MonoBehaviour
         {
             // Debug.Log ("Space");
             PlayerRB.velocity = new Vector2(PlayerRB.velocity.x , JumpSpeed);
+            flapSound.Play();
         }
 
     }
@@ -30,11 +34,16 @@ public class PlayerMotor : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameOverCanvas.SetActive (true);
+   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CurrentScore++;
         ScoreText.text = CurrentScore.ToString();
+
+        pointSound.Play();
     }
+
+
 }
